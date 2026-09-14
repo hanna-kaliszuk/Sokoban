@@ -2,15 +2,15 @@
 
 A console-based implementation of the classic Sokoban puzzle game written in C, with automatic player pathfinding and support for undoing previous pushes.
 
-> Project for **Wstęp do Programowania** (Introduction to Informatics), winter semester 2024/25, University of Warsaw.
+---
 
 ## What is Sokoban?
 
-Sokoban is a puzzle game in which the player moves crates around a board and pushes them onto designated goal cells.
-
-This implementation uses a slightly different control scheme than a traditional Sokoban game. Instead of controlling the player step by step, the user selects a crate and the direction in which it should be pushed. The program automatically finds a path for the player to the position required to perform the push.
+This implementation uses a different control scheme than a traditional game. Instead of controlling the player step by step, the user selects a crate and the direction in which it should be pushed. The program automatically finds a path for the player to the position required to perform the push.
 
 The game reads an initial board configuration from standard input and then processes commands until the end-of-input marker is reached.
+
+---
 
 ## Features
 
@@ -25,6 +25,8 @@ The game reads an initial board configuration from standard input and then proce
 - Dynamic memory allocation
 - Console-based input and output
 - Example input and expected-output files for testing
+
+---
 
 ## Technologies
 
@@ -45,6 +47,8 @@ The game reads an initial board configuration from standard input and then proce
 - Breadth-first search (BFS)
 - 2D board representation
 
+---
+
 ## Board Representation
 
 Each board cell is represented by a single ASCII character:
@@ -62,6 +66,8 @@ Each board cell is represented by a single ASCII character:
 Lowercase and uppercase letters identify the same crate. For example, `a` and `A` represent the same crate, with the latter indicating that the crate is currently on a goal.
 
 The board is stored dynamically as an array of dynamically allocated strings, allowing rows of different lengths.
+
+---
 
 ## Game Commands
 
@@ -84,6 +90,8 @@ Directions use the following notation:
 | `8` | Up |
 
 If a requested push is impossible, for example because the destination is outside the board or occupied by another crate or a wall, the command has no effect.
+
+---
 
 ## Automatic Pathfinding
 
@@ -110,6 +118,8 @@ Required pushing position
 
 This separates player movement from crate movement: the command specifies only the intended push, while the program determines how the player gets there.
 
+---
+
 ## Undo System
 
 The game keeps track of successful pushes so that previous states can be restored.
@@ -131,6 +141,8 @@ When the `0` command is used, the most recent successful push is undone and the 
 
 If there is no previous successful push, the command has no effect.
 
+---
+
 ## Memory Management
 
 The board and its history are dynamically allocated.
@@ -144,6 +156,8 @@ The implementation manages memory for:
 - BFS queue storage.
 
 Temporary structures are released after use, and board states stored in the undo history are freed when they are removed from the stack.
+
+---
 
 ## Building
 
@@ -174,6 +188,8 @@ The resulting executable is:
 sokoban
 ```
 
+---
+
 ## Running
 
 Run the program from the build directory:
@@ -189,6 +205,8 @@ For example, if the initial board and commands are stored in a file:
 ```bash
 ./sokoban < input.txt
 ```
+
+---
 
 ## Example Tests
 
@@ -207,6 +225,8 @@ diff output.txt examples/przyklad1.out
 ```
 
 The same procedure can be used for the other provided examples.
+
+---
 
 ## Project Structure
 
@@ -234,56 +254,8 @@ The main implementation is contained in:
 
 The `examples/` directory contains input/output pairs used to demonstrate and test the program.
 
-## Useful Commands
+---
 
-### Configure the project
-
-```bash
-cmake -S . -B build
-```
-
-### Build
-
-```bash
-cmake --build build
-```
-
-### Run
-
-```bash
-./build/sokoban
-```
-
-### Run an example
-
-```bash
-./build/sokoban < examples/przyklad1.in
-```
-
-### Compare with expected output
-
-```bash
-./build/sokoban < examples/przyklad1.in > output.txt
-diff output.txt examples/przyklad1.out
-```
-
-### Clean the build
-
-```bash
-rm -rf build
-```
-
-## Notes
-
-- The program expects a valid initial board configuration.
-- The board may have arbitrary dimensions and rows may have different lengths.
-- Exactly one player is present on the board.
-- Each crate has a unique letter identifier.
-- The player automatically finds a path to the required pushing position.
-- Only successful pushes are added to the undo history.
-- The command sequence ends with `.`.
-- The program ignores input after the command sequence has ended.
-
-## Course
+## Academic Context
 
 This project was developed as a course assignment for **Introduction to Informatics** at the University of Warsaw during the Winter Semester 2024/25.
